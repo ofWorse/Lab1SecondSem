@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Premain-Class: jmxapp.agent.Premainer
+Main-Class: jmxapp.Main

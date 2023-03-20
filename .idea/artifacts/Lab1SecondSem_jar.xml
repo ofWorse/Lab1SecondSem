@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Lab1SecondSem:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Lab1SecondSem_jar</output-path>
+    <root id="archive" name="Lab1SecondSem.jar">
+      <element id="module-output" name="Lab1SecondSem" />
+      <element id="extracted-dir" path="$USER_HOME$/Desktop/jboss-javassist-javassist-700be6f/javassist.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
