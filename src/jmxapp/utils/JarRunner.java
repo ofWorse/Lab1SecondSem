@@ -13,8 +13,8 @@ public class JarRunner {
         var url = new URL("jar:file:" + task.getPathToJar() + "!/");
 
         try (var loader = new URLClassLoader(new URL[]{url})) {
-            var clazz = loader.loadClass(task.getPathToMain());
             task.setClassLoader(loader);
+            var clazz = loader.loadClass(task.getPathToMain());
             var obj = (Callable<Void>) clazz.getConstructor().newInstance();
 
             if (task.getPeriod() == 0)
@@ -23,10 +23,11 @@ public class JarRunner {
                 obj.call();
                 Thread.sleep(task.getPeriod() * 1000L);
             }
-
         } catch (InterruptedException e) {
+            System.out.println("task interrupted");
             task.setStatus(Status.CANCELLED);
         } catch (Exception e) {
+            System.out.println("task excepted");
             task.setStatus(Status.ERROR);
         }
     }

@@ -40,7 +40,7 @@ public class Task {
     }
 
     public void restartWithNoProfiling() {
-        ProfilingTasks.tasks.remove(pathToMain);
+        ProfilingTasks.tasks.remove(this);
         cancel();
         try {
             thread.join();

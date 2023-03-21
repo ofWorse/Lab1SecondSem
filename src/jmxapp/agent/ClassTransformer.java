@@ -9,7 +9,6 @@ import jmxapp.ProfilingTasks;
 import java.io.PrintWriter;
 import java.lang.instrument.ClassFileTransformer;
 import java.security.ProtectionDomain;
-import java.util.Arrays;
 
 public class ClassTransformer implements ClassFileTransformer {
 
