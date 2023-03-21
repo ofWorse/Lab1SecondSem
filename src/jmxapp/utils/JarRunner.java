@@ -13,6 +13,7 @@ public class JarRunner {
 
         try (var loader = new URLClassLoader(new URL[]{url})) {
             var clazz = loader.loadClass(task.getPathToMain());
+            task.setClassLoader(loader);
             var obj = (Runnable) clazz.getConstructor().newInstance();
 
             if (task.getPeriod() == 0)

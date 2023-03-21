@@ -12,7 +12,7 @@ public class Main {
         mbs.registerMBean(mBean, name);
 
         System.out.println("приложение JMX запущено...");
-        ListOfInstrumentedTasks.s = "after main";
+        ProfilingTasks.s = "after main";
         Thread.sleep(Long.MAX_VALUE);
     }
 }

@@ -1,12 +1,10 @@
 package jmxapp.utils;
 
-import jmxapp.ListOfInstrumentedTasks;
-import jmxapp.agent.Premainer;
+import jmxapp.ProfilingTasks;
 import jmxapp.enums.Status;
 
-import java.lang.instrument.ClassFileTransformer;
-import java.lang.instrument.Instrumentation;
 import java.net.MalformedURLException;
+import java.net.URLClassLoader;
 
 public class Task {
     private int period;
@@ -15,6 +13,7 @@ public class Task {
     private Thread thread;
     private String name;
     private Status status;
+    private ClassLoader classLoader;
 
     public void runTask() {
         thread = new Thread(() -> {
@@ -32,7 +31,7 @@ public class Task {
     }
 
     public void restartWithProfiling() {
-        ListOfInstrumentedTasks.tasks.add(pathToMain);
+        ProfilingTasks.tasks.add(this);
         cancel();
         try {
             thread.join();
@@ -41,7 +40,7 @@ public class Task {
     }
 
     public void restartWithNoProfiling() {
-        ListOfInstrumentedTasks.tasks.remove(pathToMain);
+        ProfilingTasks.tasks.remove(pathToMain);
         cancel();
         try {
             thread.join();
@@ -70,5 +69,11 @@ public class Task {
     }
     public Status getStatus() {
         return this.status;
+    }
+    public ClassLoader getClassLoader() {
+        return classLoader;
+    }
+    public void setClassLoader(URLClassLoader loader) {
+        this.classLoader = loader;
     }
 }
