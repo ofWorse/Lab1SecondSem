@@ -6,6 +6,7 @@ import jmxapp.enums.Status;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.concurrent.Callable;
 
 public class JarRunner {
     public static void runTask(Task task) throws MalformedURLException {
@@ -14,12 +15,12 @@ public class JarRunner {
         try (var loader = new URLClassLoader(new URL[]{url})) {
             var clazz = loader.loadClass(task.getPathToMain());
             task.setClassLoader(loader);
-            var obj = (Runnable) clazz.getConstructor().newInstance();
+            var obj = (Callable<Void>) clazz.getConstructor().newInstance();
 
             if (task.getPeriod() == 0)
-                obj.run();
+                obj.call();
             else while (!Thread.currentThread().isInterrupted()) {
-                obj.run();
+                obj.call();
                 Thread.sleep(task.getPeriod() * 1000L);
             }
 

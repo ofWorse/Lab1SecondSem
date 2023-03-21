@@ -7,5 +7,5 @@ import java.util.Set;
 
 public class ProfilingTasks {
     public static String s = "before";
-    public static Set<Task> tasks;
+    public static Set<Task> tasks = new HashSet<>();
 }
